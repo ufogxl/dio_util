@@ -1,3 +1,4 @@
+import 'package:NetworkUtil/constants/constants.dart';
 import 'package:NetworkUtil/utils/network/networking.dart';
 
 import 'model.dart';
@@ -23,10 +24,10 @@ import 'model.dart';
 /// }
 ///
 
-class Token extends Model {
-  Token() {
-    this.data = Data();
-  }
+typedef TokenDetail = Data;
+
+class Token extends Model<TokenDetail> {
+  Token();
 
   Token.fromJson(dynamic json) {
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
@@ -51,7 +52,7 @@ class Token extends Model {
   Map<String, dynamic> get header => Header.unLoginHeader;
 
   @override
-  Method get method => Method.GET;
+  Method get method => Method.POST;
 
   @override
   String get url => RefreshTokenUrl;

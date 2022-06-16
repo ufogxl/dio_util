@@ -1,3 +1,4 @@
+import 'package:NetworkUtil/model/message_model.dart';
 import 'package:NetworkUtil/model/token_model.dart';
 import 'package:NetworkUtil/utils/network/networking.dart';
 import 'package:dio/dio.dart';
@@ -11,7 +12,6 @@ mixin ResponseInfo {
   int? errorCode;
   String? errorMessage;
   bool? success;
-  dynamic data;
 }
 
 ///
@@ -24,8 +24,10 @@ mixin ResponseInfo {
 /// for details about create [Model] subclass,see the documents at [Token].
 ///
 
-abstract class Model with RequestExtraInfo, ResponseInfo {
-  ///the url string after [Domain],no need to start with '/'.
+abstract class Model<T> with RequestExtraInfo, ResponseInfo {
+  T? data;
+
+  ///the url string after [Domain],need to start with '/'.
   String get url;
 
   ///request method.
@@ -52,6 +54,7 @@ abstract class Model with RequestExtraInfo, ResponseInfo {
 ///
 extension ModelRequestInstances on Model {
   static final tokenModel = Token();
+  static final messageModel = MessageModel();
 }
 
 /// for requests there is not need to create [Model] subclasses.

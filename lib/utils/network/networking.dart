@@ -1,25 +1,23 @@
-import 'dart:html';
-
+import 'package:NetworkUtil/constants/constants.dart';
 import 'package:NetworkUtil/model/token_model.dart';
 import 'package:dio/dio.dart';
 
 import 'package:NetworkUtil/model/model.dart';
 
 part 'interceptors.dart';
-part 'constants.dart';
 part 'header.dart';
 part 'method.dart';
 part 'options.dart';
 
 /// used for doing network request.
 ///
-/// * The tool returns a stream/plain text/bytes/[Model] implementation instance,depends on the responseType provided from [Model] implementation instance passed to [requestModel] method.
+/// * The tool returns a stream/plain text/bytes/[Model] subclass instance,depends on the responseType provided from [Model] subclass instance passed to [requestModel] method.
 ///
-/// * If the response type is json string,the tool transfers [Response] to custom nullable [Model] implementation instance which is the same type as the [Model] instance passed to [requestModel] method.
+/// * If the response type is json string,the tool transfers [Response] to custom nullable [Model] subclass instance which is the same type as the [Model] instance passed to [requestModel] method.
 ///
-/// * When success,a transferred [Model] implementation instance will be returned;the tool returns a null on failure.
+/// * When success,a transferred [Model] subclass instance will be returned;the tool returns a null on failure.
 ///
-/// * Otherwise the tool returns a [Model] implementation instance whose member [data] contains the response's [data];
+/// * Otherwise the tool returns a [Model] subclass instance whose member [data] contains the response's [data];
 ///
 
 typedef DownloadProgressCallBack = Function(double);
@@ -143,10 +141,11 @@ class NetworkUtil {
         showToast(message);
       }
     }
+    Model? result = response?.data as Model?;
     print(
         "发送请求：${model.url}\n请求头：${model.header}\n请求体：$body\n请求url参数：$params\n" +
-            "请求结果：$response");
-    return response?.data as Model?;
+            "请求结果：${result?.data}");
+    return result;
   }
 
   _downloadFileWithProgress(
