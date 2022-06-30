@@ -31,9 +31,6 @@ class MessageModel extends Model<Data> {
   }
 
   @override
-  Data? data;
-
-  @override
   Model? createModel(json) => MessageModel.fromJson(json);
 
   @override

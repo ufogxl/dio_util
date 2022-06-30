@@ -38,7 +38,7 @@ class NetworkUtil {
   }
 
   ///
-  /// * model:[Model] subclass instance,the returned [Future]'s [Model] is the same type with this parameter model instance.
+  /// * model:[Model] subclass instance,the returned [Future]'s [Model] is of the same type as this parameter.
   /// * params:url query parameters
   /// * body:request body,for json requests,its a Map or any class with toJson method.for formData requests,it will be a [FormData] instance.for file uploading,you can pass a map that contains the required key value pair whose value is a [MultipartFile] instance.
   /// * toastError:for some background task without need for display a toast or other notice contents.
